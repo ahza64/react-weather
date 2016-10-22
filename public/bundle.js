@@ -27183,6 +27183,9 @@
 	var Weather = React.createClass({
 	  displayName: 'Weather',
 
+	  handleSearch: function handleSearch(location) {
+	    alert(location);
+	  },
 	  render: function render() {
 	    return React.createElement(
 	      'div',
@@ -27192,7 +27195,7 @@
 	        null,
 	        'weather component'
 	      ),
-	      React.createElement(WeatherForm, null),
+	      React.createElement(WeatherForm, { onSearch: this.handleSearch }),
 	      React.createElement(WeatherMessage, null)
 	    );
 	  }
@@ -27204,25 +27207,36 @@
 /* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var React = __webpack_require__(1);
 
 	var WeatherForm = React.createClass({
-	  displayName: "WeatherForm",
+	  displayName: 'WeatherForm',
+
+	  onFormSubmit: function onFormSubmit(e) {
+	    e.preventDefault();
+
+	    var location = this.refs.location.value;
+	    console.log(location.length);
+	    if (location.length > 0) {
+	      this.refs.location.value = '';
+	      this.props.onSearch(location);
+	    }
+	  },
 
 	  render: function render() {
 	    return React.createElement(
-	      "div",
+	      'div',
 	      null,
 	      React.createElement(
-	        "form",
-	        null,
-	        React.createElement("input", { type: "text" }),
+	        'form',
+	        { onSubmit: this.onFormSubmit },
+	        React.createElement('input', { type: 'text', ref: 'location' }),
 	        React.createElement(
-	          "button",
+	          'button',
 	          null,
-	          "Get Weather"
+	          'Get Weather'
 	        )
 	      )
 	    );
