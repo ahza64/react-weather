@@ -27184,9 +27184,13 @@
 
 	  render: function render() {
 	    return React.createElement(
-	      'h3',
+	      'div',
 	      null,
-	      'weather component',
+	      React.createElement(
+	        'h3',
+	        null,
+	        'weather component'
+	      ),
 	      React.createElement(WeatherForm, null),
 	      React.createElement(WeatherMessage, null)
 	    );
@@ -27208,20 +27212,16 @@
 
 	  render: function render() {
 	    return React.createElement(
-	      "form",
+	      "div",
 	      null,
 	      React.createElement(
-	        "div",
+	        "form",
 	        null,
-	        React.createElement("input", { type: "text" })
-	      ),
-	      React.createElement(
-	        "div",
-	        null,
+	        React.createElement("input", { type: "text" }),
 	        React.createElement(
 	          "button",
 	          null,
-	          "Submit"
+	          "Get Weather"
 	        )
 	      )
 	    );
@@ -27246,7 +27246,7 @@
 	      'div',
 	      null,
 	      React.createElement(
-	        'h1',
+	        'h3',
 	        null,
 	        'Hello weather!'
 	      )

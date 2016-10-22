@@ -4,7 +4,7 @@ var WeatherMessage = React.createClass({
   render: function () {
     return (
       <div>
-        <h1>Hello weather!</h1>
+        <h3>Hello weather!</h3>
       </div>
     );
   }
