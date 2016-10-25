@@ -60,8 +60,8 @@
 
 	var Main = __webpack_require__(235);
 	var Weather = __webpack_require__(237);
-	var About = __webpack_require__(266);
-	var Examples = __webpack_require__(267);
+	var About = __webpack_require__(267);
+	var Examples = __webpack_require__(268);
 
 	ReactDOM.render(React.createElement(
 	  Router,
@@ -27308,17 +27308,13 @@
 /* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	'use strict';
 
 	var axios = __webpack_require__(241);
-
-	// add secret api key
-	// require('dotenv').config();
+	var key = __webpack_require__(266).key;
 
 	//build base url
-	var OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?units=imperial&appid=' + process.env.WEATHER_KEY;
-	console.log(process.env.WEATHER_KEY);
-	// const OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?units=imperial&appid=';
+	var OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?units=imperial&appid=' + key;
 
 	module.exports = {
 	  getTemp: function getTemp(location) {
@@ -27338,7 +27334,6 @@
 	    });
 	  }
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
 /* 241 */
@@ -28823,6 +28818,16 @@
 
 /***/ },
 /* 266 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = {
+	    key: '62a8dad554f26c4935c0475d25da8e5c'
+	};
+
+/***/ },
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28844,7 +28849,7 @@
 	module.exports = About;
 
 /***/ },
-/* 267 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

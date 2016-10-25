@@ -4,13 +4,6 @@ module.exports = {
   node: {
     fs: "empty"
   },
-  // target: 'node',
-  // plugins: [
-  //   new Dotenv({
-  //     path: './.env',
-  //     safe: false
-  //   })
-  // ],
   entry: './app/app.jsx',
   output: {
     path: __dirname,
@@ -26,7 +19,8 @@ module.exports = {
       Examples: 'app/components/Examples.jsx',
       WeatherForm: 'app/components/WeatherForm.jsx',
       WeatherMessage: 'app/components/WeatherMessage.jsx',
-      openWeatherMap: 'app/api/openWeatherMap.jsx'
+      openWeatherMap: 'app/api/openWeatherMap.jsx',
+      key: 'key.jsx'
     },
     extensions: ['', '.js', '.jsx']
   },

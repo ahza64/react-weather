@@ -1,13 +1,9 @@
 
 var axios = require('axios');
-
-// add secret api key
-// require('dotenv').config();
+var key = require('key').key;
 
 //build base url
-const OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?units=imperial&appid=' + process.env.WEATHER_KEY;
-console.log(process.env.WEATHER_KEY);
-// const OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?units=imperial&appid=';
+const OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?units=imperial&appid=' + key;
 
 module.exports = {
   getTemp: function (location) {
