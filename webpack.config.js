@@ -1,4 +1,16 @@
+// var Dotenv = require('dotenv-webpack');
+
 module.exports = {
+  node: {
+    fs: "empty"
+  },
+  // target: 'node',
+  // plugins: [
+  //   new Dotenv({
+  //     path: './.env',
+  //     safe: false
+  //   })
+  // ],
   entry: './app/app.jsx',
   output: {
     path: __dirname,

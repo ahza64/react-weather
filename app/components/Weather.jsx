@@ -16,6 +16,7 @@ var Weather = React.createClass({
     var that = this;
 
     openWeatherMap.getTemp(location).then(function (temp) {
+      // "this" gets lost when in this function, have to pass var
       that.setState({
         location: location,
         temp: temp

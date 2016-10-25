@@ -60,8 +60,8 @@
 
 	var Main = __webpack_require__(235);
 	var Weather = __webpack_require__(237);
-	var About = __webpack_require__(267);
-	var Examples = __webpack_require__(268);
+	var About = __webpack_require__(266);
+	var Examples = __webpack_require__(267);
 
 	ReactDOM.render(React.createElement(
 	  Router,
@@ -27196,6 +27196,7 @@
 	    var that = this;
 
 	    openWeatherMap.getTemp(location).then(function (temp) {
+	      // "this" gets lost when in this function, have to pass var
 	      that.setState({
 	        location: location,
 	        temp: temp
@@ -27307,25 +27308,26 @@
 /* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
 	var axios = __webpack_require__(241);
 
 	// add secret api key
-	__webpack_require__(266).config();
+	// require('dotenv').config();
 
 	//build base url
-	var OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?units=imperial&appid=' + 'process.env.WEATHER_KEY';
-	console.log(OPEN_WEATHER_MAP_URL);
+	var OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?units=imperial&appid=' + process.env.WEATHER_KEY;
+	console.log(process.env.WEATHER_KEY);
+	// const OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?units=imperial&appid=';
 
 	module.exports = {
 	  getTemp: function getTemp(location) {
-	    var encodedLocation = encodedURIComponent(location);
+	    var encodedLocation = encodeURIComponent(location);
 	    // add var params to url
 	    var requestUrl = OPEN_WEATHER_MAP_URL + '&q=' + encodedLocation;
 
 	    // make external api req
-	    axios.get(requestUrl).then(function (res) {
+	    return axios.get(requestUrl).then(function (res) {
 	      if (res.data.cod && res.data.message) {
 	        throw new Error(res.data.message);
 	      } else {
@@ -27336,6 +27338,7 @@
 	    });
 	  }
 	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
 /* 241 */
@@ -28822,95 +28825,6 @@
 /* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict'
-
-	var fs = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"fs\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()))
-
-	module.exports = {
-	  /*
-	   * Main entry point into dotenv. Allows configuration before loading .env
-	   * @param {Object} options - valid options: path ('.env'), encoding ('utf8')
-	   * @returns {Boolean}
-	  */
-	  config: function (options) {
-	    var path = '.env'
-	    var encoding = 'utf8'
-	    var silent = false
-
-	    if (options) {
-	      if (options.silent) {
-	        silent = options.silent
-	      }
-	      if (options.path) {
-	        path = options.path
-	      }
-	      if (options.encoding) {
-	        encoding = options.encoding
-	      }
-	    }
-
-	    try {
-	      // specifying an encoding returns a string instead of a buffer
-	      var parsedObj = this.parse(fs.readFileSync(path, { encoding: encoding }))
-
-	      Object.keys(parsedObj).forEach(function (key) {
-	        process.env[key] = process.env[key] || parsedObj[key]
-	      })
-
-	      return parsedObj
-	    } catch (e) {
-	      if (!silent) {
-	        console.error(e)
-	      }
-	      return false
-	    }
-	  },
-
-	  /*
-	   * Parses a string or buffer into an object
-	   * @param {String|Buffer} src - source to be parsed
-	   * @returns {Object}
-	  */
-	  parse: function (src) {
-	    var obj = {}
-
-	    // convert Buffers before splitting into lines and processing
-	    src.toString().split('\n').forEach(function (line) {
-	      // matching "KEY' and 'VAL' in 'KEY=VAL'
-	      var keyValueArr = line.match(/^\s*([\w\.\-]+)\s*=\s*(.*)?\s*$/)
-	      // matched?
-	      if (keyValueArr != null) {
-	        var key = keyValueArr[1]
-
-	        // default undefined or missing values to empty string
-	        var value = keyValueArr[2] ? keyValueArr[2] : ''
-
-	        // expand newlines in quoted values
-	        var len = value ? value.length : 0
-	        if (len > 0 && value.charAt(0) === '\"' && value.charAt(len - 1) === '\"') {
-	          value = value.replace(/\\n/gm, '\n')
-	        }
-
-	        // remove any surrounding quotes and extra spaces
-	        value = value.replace(/(^['"]|['"]$)/g, '').trim()
-
-	        obj[key] = value
-	      }
-	    })
-
-	    return obj
-	  }
-
-	}
-
-	module.exports.load = module.exports.config
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
-
-/***/ },
-/* 267 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 
 	var React = __webpack_require__(1);
@@ -28930,7 +28844,7 @@
 	module.exports = About;
 
 /***/ },
-/* 268 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
